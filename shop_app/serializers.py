@@ -15,7 +15,7 @@ class DetailedProductSerializer(serializers.ModelSerializer):
         fields = ["id", "name", "price", "slug", "image", "description", "similar_products"]
 
     def get_similar_products(self, product):
-        products = Product.objects.filter(category=product.category).exclude(id=product.id)
+        products = Product.objects.filter(category=product.category).exclude(id=product.id)  # type: ignore
         serializer = ProductSerializer(products, many=True)
         return serializer.data
 
@@ -53,7 +53,7 @@ class CartSerializer(serializers.ModelSerializer):
         return total
 
     def get_num_of_product(self, cart):
-        product_ids = CartItem.objects.filter(cart=cart).values_list("product_id", flat=True)
+        product_ids = CartItem.objects.filter(cart=cart).values_list("product_id", flat=True)  # type: ignore
         product_count = product_ids.distinct().count()
         return product_count
 
@@ -93,31 +93,30 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ["id", "username", "first_name", "last_name", "email", "city", "state", "address", "phone", "items"]
 
     def get_items(self, user):
-        cartitems = CartItem.objects.filter(cart__user=user, cart__paid=True)[:10]
+        cartitems = CartItem.objects.filter(cart__user=user, cart__paid=True)[:10]  # type: ignore
         serializer = NewCartItemSerializer(cartitems, many=True)
         return serializer.data
 
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)  # Explicitly define password field
+    
     class Meta:
         model = get_user_model()
-        fields = ["id", "username", "first_name", "last_name", "password"]
+        fields = ["id", "username", "first_name", "last_name", "email", "password", "city", "state", "address", "phone"]
         extra_kwargs = {
             'password': {'write_only': True} 
         }
     
     def create(self, validated_data):
-        username = validated_data["username"]
-        first_name = validated_data["first_name"]
-        last_name = validated_data["last_name"]
-        first_name = validated_data["first_name"]
-        password = validated_data["password"]
-
+        # Remove password from validated_data to handle separately
+        password = validated_data.pop('password', None)
+        
         user = get_user_model()
-        new_user = user.objects.create(username=username, 
-                                       first_name=first_name, last_name=last_name)
-        new_user.set_password(password)
+        new_user = user(**validated_data)
+        if password:
+            new_user.set_password(password)
         new_user.save()
         return new_user
 

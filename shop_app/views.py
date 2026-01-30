@@ -211,6 +211,7 @@ def initiate_payment(request):
 
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def payment_callback(request):
     status = request.GET.get('status')
     tx_ref = request.GET.get('tx_ref')

@@ -25,7 +25,7 @@ class Product(models.Model):
             self.slug = slugify(self.name)
             unique_slug = self.slug
             counter = 1
-            if Product.objects.filter(slug=unique_slug).exists():
+            if Product.objects.filter(slug=unique_slug).exists():  # type: ignore
                 unique_slug = f'{self.slug}-{counter}'
                 counter += 1
             self.slug = unique_slug
