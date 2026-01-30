@@ -11,6 +11,21 @@ Welcome to **Shopsphere**, a modern e-commerce API built using Django Rest Frame
 - **Payment Integration**: Supports payment gateways like PayPal and Flutterwave.
 
 ---
+## 🚀 **Images**
+![Registeration Page](<../shopshere_backend/media/screenshots/Screenshot 2026-01-30 181333.png>)
+![Login Page](<../shopshere_backend/media/screenshots/Screenshot 2026-01-30 181356.png>)
+![Home Page](<../shopshere_backend/media/screenshots/Screenshot 2026-01-30 181412.png>)
+![Home Page#2](<../shopshere_backend/media/screenshots/Screenshot 2026-01-30 181427.png>)
+![Product Page](<../shopshere_backend/media/screenshots/Screenshot 2026-01-30 181450.png>)
+![Product Page Two](<../shopshere_backend/media/screenshots/Screenshot 2026-01-30 181506.png>)
+![Checkout Page](<../shopshere_backend/media/screenshots/Screenshot 2026-01-30 181522.png>)
+![Payment Page](<../shopshere_backend/media/screenshots/Screenshot 2026-01-30 181536.png>)
+![PayPal Payment Integration](<../shopshere_backend/media/screenshots/Screenshot 2026-01-30 181556.png>)
+![About Page](<media/screenshots/Screenshot 2026-01-30 183500.png>)
+![Profile Page](<media/screenshots/Screenshot 2026-01-30 183514.png>)
+
+
+---
 
 ## 🛠️ **Technologies Used**
 - **Backend**: Django Rest Framework (DRF)
