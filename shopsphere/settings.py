@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-^h&u&$flrojnm8*v5a@nn2n!%j+n!ogd2&0)(c&mxtkbi_o+zq
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = ["codealpha-shopsphere-backend.onrender.com", "localhost", "127.0.0.1"]
 
@@ -146,6 +146,9 @@ CORS_ALLOWED_ORIGINS = [
 "http://localhost:5175",
 "https://codealpha-shopsphere-frontend.onrender.com"
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True  # Only for development - remove in production
+CORS_ALLOW_CREDENTIALS = True
 
 
 REST_FRAMEWORK = {
